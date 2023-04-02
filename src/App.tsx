@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'; 
+
+import { Content } from './components/Content';
+import { Footer } from './components/UI/Footer';
+import { Header } from './components/Header';
+import { ProductFullPage } from './components/ProductFullPage';
+
+import './style/css/style.css';
+import { Cart } from './components/Cart';
+import { AdminPage } from './components/AdminPage/AdminPage';
+import { AdminPageChangeInfo } from './components/AdminPage/AdminPageChangeInfo';
+import { AdminPageCreate } from './components/AdminPage/AdminPageCreate';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className="App">
+			<Router>
+				<Header />
+				<Routes>
+					<Route path='/' element={<Content />} />
+					<Route path='/cart' element={<Cart />} />
+					<Route path='/products/:id' element={<ProductFullPage />} />
+					<Route path='/admin-page' element={<AdminPage />} />
+					<Route path='/admin-page/edit-product/:id' element={<AdminPageChangeInfo />} />
+					<Route path='/admin-page-create' element={<AdminPageCreate />} />
+				</Routes>
+				<Footer />
+			</Router>
+		</div>
+	);
 }
 
 export default App;
